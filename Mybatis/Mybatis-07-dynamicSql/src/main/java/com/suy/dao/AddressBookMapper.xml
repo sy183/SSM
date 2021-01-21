@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.suy.dao.AddressBookMapper">
+    <select id="getAddressBookIf" resultType="addressBook">
+        select * from address_book
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="name != null">
+                and name like "%"#{name}"%"
+            </if>
+            <if test="number != null">
+                and number like "%"#{number}"%"
+            </if>
+            <if test="server != null">
+                and server like "%"#{server}"%"
+            </if>
+        </where>
+    </select>
+
+    <select id="getAddressBookChoose" resultType="addressBook">
+        select * from address_book
+        <where>
+            <choose>
+                <when test="key == 'id'">
+                    and id = #{value}
+                </when>
+                <when test="key == 'name'">
+                    and name like "%"#{value}"%"
+                </when>
+                <when test="key == 'number'">
+                    and number like "%"#{value}"%"
+                </when>
+                <when test="key == 'server'">
+                    and server like "%"#{value}"%"
+                </when>
+                <otherwise>
+                    and 1 = 0
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
+    <select id="getAddressBookColumns" parameterType="list" resultType="addressBook">
+        select
+        <foreach collection="fields" item="field" separator=", ">
+            ${field}
+        </foreach>
+        from address_book;
+    </select>
+
+    <update id="updateAddressBookById" parameterType="map">
+        update address_book
+        <set>
+            <if test="name != null">name = #{name},</if>
+            <if test="number != null">number = #{number},</if>
+            <if test="server != null">server = #{server},</if>
+        </set>
+        where id = #{id}
+    </update>
+</mapper>

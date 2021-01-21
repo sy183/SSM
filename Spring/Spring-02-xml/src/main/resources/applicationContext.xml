@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="gateway" class="com.suy.pojo.IPAddress">
+        <property name="address" value="192.168.1.1"/>
+        <property name="netmask" value="24"/>
+    </bean>
+
+    <bean id="10.169.0.169" class="com.suy.pojo.IPAddress">
+        <property name="address" value="10.169.0.169"/>
+        <property name="netmask" value="16"/>
+    </bean>
+
+    <bean id="192.168.1.129" class="com.suy.pojo.IPAddress">
+        <property name="address" value="192.168.1.129"/>
+        <property name="netmask" value="24"/>
+    </bean>
+
+    <bean id="192.168.0.129" class="com.suy.pojo.IPAddress">
+        <property name="address" value="192.168.0.129"/>
+        <property name="netmask" value="24"/>
+    </bean>
+
+    <bean id="192.168.18.129" class="com.suy.pojo.IPAddress">
+        <property name="address" value="192.168.18.129"/>
+        <property name="netmask" value="24"/>
+    </bean>
+
+    <bean id="dns1" class="com.suy.pojo.IPAddress">
+        <property name="address" value="114.114.114.114"/>
+        <property name="netmask" value="24"/>
+    </bean>
+
+    <bean id="dns2" class="com.suy.pojo.IPAddress">
+        <property name="address" value="8.8.8.8"/>
+        <property name="netmask" value="24"/>
+    </bean>
+
+    <bean id="192.168.80.1" class="com.suy.pojo.IPAddress">
+        <property name="address" value="192.168.80.1"/>
+        <property name="netmask" value="24"/>
+    </bean>
+
+    <bean id="192.168.50.1" class="com.suy.pojo.IPAddress">
+        <property name="address" value="192.168.80.1"/>
+        <property name="netmask" value="24"/>
+    </bean>
+
+    <bean id="network" class="com.suy.pojo.Network">
+        <property name="macAddress" value="00-2B-67-F6-C0-03"/>
+        <property name="addresses">
+            <list>
+                <ref bean="10.169.0.169"/>
+                <ref bean="192.168.1.129"/>
+                <ref bean="192.168.0.129"/>
+                <ref bean="192.168.18.129"/>
+            </list>
+        </property>
+        <property name="gateway" ref="gateway"/>
+        <property name="arpTable">
+            <map>
+                <entry key="192.168.50.1" value="00-50-56-C0-00-08"/>
+                <entry key="192.168.80.1" value="00-50-56-C0-00-01"/>
+            </map>
+        </property>
+        <property name="dns">
+            <set>
+                <ref bean="dns1"/>
+                <ref bean="dns2"/>
+            </set>
+        </property>
+        <property name="description">
+            <null/>
+        </property>
+        <property name="info">
+            <props>
+                <prop key="dhcp4">false</prop>
+                <prop key="dhcp6">false</prop>
+            </props>
+        </property>
+    </bean>
+</beans>

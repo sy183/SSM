@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.suy.dao.TeacherMapper">
+    <select id="getTeachersByJoin" resultMap="getTeachersByJoinResultMap">
+        select s.id, s.name, s.tid, t.name tname from student s join teacher t on t.id = s.tid
+    </select>
+
+    <resultMap id="getTeachersByJoinResultMap" type="Teacher">
+        <result property="name" column="tname"/>
+        <result property="id" column="tid"/>
+        <collection property="students" ofType="Student">
+            <result property="id" column="id"/>
+            <result property="name" column="name"/>
+        </collection>
+    </resultMap>
+
+    <select id="getTeachersBySubSelect" resultMap="getTeachersBySubSelectResultMap">
+        select * from teacher;
+    </select>
+
+    <resultMap id="getTeachersBySubSelectResultMap" type="Teacher">
+        <collection property="students" ofType="Student" column="id" select="getStudentsBySid"/>
+    </resultMap>
+
+    <select id="getStudentsBySid" resultType="Student">
+        select * from student where tid = #{id}
+    </select>
+</mapper>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        https://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <context:annotation-config/>
+    <context:component-scan base-package="com.suy"/>
+
+    <bean id="suy" class="com.suy.pojo.User">
+        <property name="id" value="1"/>
+        <property name="user" value="suy"/>
+        <property name="passwd" value="css66018"/>
+        <property name="privilege" value="512"/>
+    </bean>
+
+    <bean id="lili" class="com.suy.pojo.User">
+        <property name="id" value="2"/>
+        <property name="user" value="lili"/>
+        <property name="passwd" value="123456"/>
+        <property name="privilege" value="512"/>
+    </bean>
+
+    <bean id="ming" class="com.suy.pojo.User">
+        <property name="id" value="3"/>
+        <property name="user" value="ming"/>
+        <property name="passwd" value="123456"/>
+        <property name="privilege" value="512"/>
+    </bean>
+
+    <aop:config>
+        <aop:pointcut id="pointCut" expression="execution(* com.suy.service.UserServiceImpl.*(..))"/>
+        <aop:advisor advice-ref="logger" pointcut-ref="pointCut"/>
+    </aop:config>
+
+</beans>

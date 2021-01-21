@@ -1,0 +1,41 @@
+<!DOCTYPE web-app PUBLIC
+        "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+        "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+    <display-name>Archetype Created Web Application</display-name>
+
+    <!-- 配置字符编码格式为UTF-8，解决post请求乱码问题 -->
+    <filter>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>utf-8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!-- 配置spring-mvc拦截器 -->
+    <servlet>
+        <!-- 拦截器的名称 -->
+        <servlet-name>DispatcherServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <!-- 指定spring-mvc配置文件路径 -->
+            <param-name>contextConfigLocation</param-name>
+            <param-value>/WEB-INF/DispatcherServlet-servlet.xml</param-value>
+        </init-param>
+        <!-- 容器初始化时启动拦截器 -->
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DispatcherServlet</servlet-name>
+        <!-- 拦截路径 -->
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+</web-app>
