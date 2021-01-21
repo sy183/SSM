@@ -12,7 +12,7 @@
     <artifactId>SpringMVC</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>SpringMVC-Version-01</module>
+        <module>SpringMVC-01-Hello</module>
     </modules>
 
     <properties>
