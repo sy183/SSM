@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.suy.dao.UserMapper">
+    <select id="getUserList" resultType="user">
+        select * from user
+    </select>
+
+    <insert id="insertUser" parameterType="user">
+        insert into user (id, user, passwd, privilege) values (#{id}, #{user}, #{passwd}, #{privilege})
+    </insert>
+
+    <delete id="deleteUserById">
+        delete from user where id = #{id}
+    </delete>
+</mapper>
