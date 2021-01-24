@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>SpringMVC-01-Hello</module>
+        <module>SpringMVC-02-SSM</module>
     </modules>
 
     <properties>

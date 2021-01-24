@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.suy.dao.UserMapper">
+    <select id="getUsers" resultType="user">
+        select * from user
+    </select>
+
+    <select id="getUserById" resultType="user">
+        select * from user where id = #{id}
+    </select>
+
+    <select id="getUsersByName" resultType="user">
+        select * from user where user.user like CONCAT('%', #{name}, '%')
+    </select>
+
+    <select id="getUsersByPrivilege" resultType="user">
+        select * from user where privilege = #{privilege}
+    </select>
+
+    <select id="getUserByNameAndPasswd" resultType="user">
+        select * from user where user.user = #{name} and passwd = #{passwd}
+    </select>
+
+    <insert id="insertUser" parameterType="user">
+        insert into user (user, passwd, privilege) values (#{user}, #{passwd}, #{privilege});
+    </insert>
+
+    <delete id="deleteUserById">
+        delete from user where id = #{id}
+    </delete>
+
+    <update id="updateUser" parameterType="user">
+        update user
+        <set>
+            <if test="user != null">user.user = #{user},</if>
+            <if test="passwd != null">passwd = #{passwd},</if>
+            <if test="privilege != null">privilege = #{privilege}</if>
+        </set>
+        where id = #{id}
+    </update>
+</mapper>
